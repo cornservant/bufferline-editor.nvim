@@ -1,4 +1,4 @@
-*bufferline.nvim*   For Neovim version 0.5+   Last change: 2021 August 20
+*bufferline-editor.nvim*   For Neovim version 0.5+   Last change: 2025 March 18
 
 Edit and reorder your `bufferline`.
 
