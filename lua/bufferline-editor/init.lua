@@ -5,7 +5,7 @@ local buffers = require("bufferline-editor.bufferline_adapter")
 
 ---@type bufferline-editor.config
 M.config = {
-    max_width = 80,
+    max_width = 120,
     max_height = 30,
 }
 
