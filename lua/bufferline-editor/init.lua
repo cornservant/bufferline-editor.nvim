@@ -26,7 +26,7 @@ local function window_config()
     local screen_width = vim.o.columns
     local screen_height = vim.o.lines
     local width = math.min(screen_width, M.config.max_width)
-    local height = math.min(screen_height, M.config.max_height)
+    local height = math.min(screen_height - 3, M.config.max_height)
     return {
         relative = "editor",
         border = "rounded",
