@@ -8,3 +8,5 @@
 ---@field apply_changes fun(editor: bufferline-editor.editor)
 ---
 ---@class bufferline-editor.config
+---@field max_width? integer
+---@field max_height? integer

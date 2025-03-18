@@ -4,7 +4,10 @@ local M = {}
 local buffers = require("bufferline-editor.bufferline_adapter")
 
 ---@type bufferline-editor.config
-M.config = {}
+M.config = {
+    max_width = 80,
+    max_height = 30,
+}
 
 ---@type bufferline-editor.editor
 M.editor = {
@@ -22,8 +25,8 @@ end
 local function window_config()
     local screen_width = vim.o.columns
     local screen_height = vim.o.lines
-    local width = math.min(screen_width, 80)
-    local height = math.min(screen_height, 30)
+    local width = math.min(screen_width, M.config.max_width)
+    local height = math.min(screen_height, M.config.max_height)
     return {
         relative = "editor",
         border = "rounded",
