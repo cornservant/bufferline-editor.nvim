@@ -3,6 +3,9 @@ local M = {}
 ---@type bufferline-editor.buffers
 local buffers = require("bufferline-editor.bufferline_adapter")
 
+---@type bufferline-editor.config
+M.config = {}
+
 ---@type bufferline-editor.editor
 M.editor = {
     buffer = nil,
