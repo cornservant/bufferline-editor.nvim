@@ -36,6 +36,26 @@ local function window_config()
     }
 end
 
+---@param buf integer
+local function short_buf_name(buf)
+    if not vim.api.nvim_buf_is_valid(buf) then return nil end
+
+    local bufname = vim.api.nvim_buf_get_name(buf)
+
+    if bufname == "" then
+        return nil
+    end
+
+    local cwd = vim.loop.cwd()
+    if cwd == nil then return nil end
+
+    if vim.startswith(bufname, cwd) then
+        return string.sub(bufname, #cwd + 2)
+    else
+        return bufname
+    end
+end
+
 ---@output boolean
 function M.is_closed()
     M.validate()
@@ -168,8 +188,7 @@ function M.render_ui(current_buffer)
     local contents = {}
 
     for index, buf in ipairs(buffers.items()) do
-        local name = vim.api.nvim_buf_get_name(buf)
-        contents[index] = name
+        contents[index] = short_buf_name(buf) or ""
     end
 
     if M.editor.window == nil or M.editor.buffer == nil then
