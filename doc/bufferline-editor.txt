@@ -1,0 +1,37 @@
+*bufferline.nvim*   For Neovim version 0.5+   Last change: 2021 August 20
+
+Edit and reorder your `bufferline`.
+
+Author: Long Huynh Huu
+
+==============================================================================
+CONTENTS                                    *bufferline-editor*
+*bufferline-editor-contents*
+
+Introduction...........................: |bufferline-editor-introduction|
+Usage..................................: |bufferline-editor-usage|
+Configuration..........................: |bufferline-editor-configuration|
+
+==============================================================================
+INTRODUCTION				                *bufferline-editor-introduction*
+
+Edit and reorder your `bufferline`.
+
+==============================================================================
+USAGE						                *bufferline-editor-usage*
+
+This plugin requires the presence of `bufferline` plugin
+(https://github.com/akinsho/bufferline.nvim).
+
+You can toggle the buffer editor window using lua
+
+>lua
+    require('bufferline-editor').editor_toggle()
+<
+
+==============================================================================
+CONFIGURATION					            *bufferline-editor-configuration*
+
+There are no available configuration options yet.
+
+vim:tw=78:sw=4:ft=help:norl:
