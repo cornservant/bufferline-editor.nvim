@@ -25,6 +25,6 @@ Buffer editor for [akinsho/bufferline.nvim](https://github.com/akinsho/bufferlin
 ---@type bufferline-editor.config
 opts = {
     max_width = 120,
-    max_height = 120,
+    max_height = 30,
 }
 ```
