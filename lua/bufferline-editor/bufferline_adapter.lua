@@ -20,9 +20,16 @@ local function apply_changes(editor)
     local old_components = state.components
     local new_components = vim.tbl_filter(function(cmp) return cmp ~= nil end,
         vim.tbl_map(function(line)
+            local buf = nil
             local buf_str = string.match(line, "^ *%d+")
-            if buf_str == nil then return nil end
-            local buf = 0 + buf_str
+            if buf_str ~= nil then
+                buf = 0 + buf_str
+            else
+                -- fallback strategy
+                buf = vim.fn.bufnr(line)
+                if buf == -1 then return nil end
+            end
+
             for i, cmp in pairs(old_components) do
                 if cmp.id == buf then
                     table.remove(old_components, i)
