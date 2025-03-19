@@ -210,6 +210,13 @@ function M.render_ui(current_buffer)
             vim.api.nvim_win_set_cursor(M.editor.window, {buffer_idx, 0})
         end
     end
+
+    do -- NOTE: remove empty buffer from the undo history
+        local undolevels = vim.api.nvim_get_option_value("undolevels", { buf = M.editor.buffer })
+        vim.api.nvim_set_option_value("undolevels", -1, { buf = M.editor.buffer })
+        vim.api.nvim_buf_set_lines(M.editor.buffer, 0, #contents, false, contents)
+        vim.api.nvim_set_option_value("undolevels", undolevels, { buf = M.editor.buffer })
+    end
 end
 
 return M
