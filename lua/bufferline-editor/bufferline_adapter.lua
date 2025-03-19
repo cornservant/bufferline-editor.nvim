@@ -39,6 +39,8 @@ local function apply_changes(editor)
             if modified then
                 vim.notify("Cannot close buffer " .. buf .. " (" .. name .. ") due to unsaved changes", vim.log.levels.WARN)
             else
+                -- BUG: cannot doesn't delete buffer from floating window
+                -- https://github.com/neovim/neovim/issues/20315
                 vim.api.nvim_buf_delete(buf, {})
             end
         end
