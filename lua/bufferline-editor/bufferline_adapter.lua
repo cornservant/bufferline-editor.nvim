@@ -32,8 +32,14 @@ local function apply_changes(editor)
         end, lines))
 
     for _, cmp in pairs(old_components) do
-        if vim.api.nvim_buf_is_valid(cmp.id) then
-            vim.api.nvim_buf_delete(cmp.id, {})
+        local buf = cmp.id
+        if vim.api.nvim_buf_is_valid(buf) then
+            if vim.api.nvim_buf_get_option(buf, "modified") then
+                local name = vim.api.nvim_buf_get_name(buf)
+                vim.notify("Cannot close buffer " .. buf .. " (" .. name .. ") due to unsaved changes", vim.log.levels.WARN)
+            else
+                vim.api.nvim_buf_delete(buf, {})
+            end
         end
     end
 
