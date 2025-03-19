@@ -191,7 +191,7 @@ function M.render_ui(current_buffer)
     local contents = {}
 
     for index, buf in ipairs(buffers.items()) do
-        contents[index] = short_buf_name(buf) or ""
+        contents[index] = string.format("%-3d %s", buf, short_buf_name(buf) or "[No Name]")
     end
 
     if M.editor.window == nil or M.editor.buffer == nil then
@@ -204,6 +204,8 @@ function M.render_ui(current_buffer)
     vim.api.nvim_buf_set_option(M.editor.buffer, "filetype", "buffer_manager")
     vim.api.nvim_buf_set_option(M.editor.buffer, "buftype", "acwrite")
     vim.api.nvim_buf_set_option(M.editor.buffer, "bufhidden", "delete")
+    vim.api.nvim_buf_set_option(M.editor.buffer, "number", false)
+    vim.api.nvim_buf_set_option(M.editor.buffer, "relativenumber", false)
     if current_buffer ~= nil then
         local buffer_idx = current_buffer_index(current_buffer)
         if buffer_idx ~= nil then

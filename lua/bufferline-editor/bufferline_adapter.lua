@@ -20,8 +20,9 @@ local function apply_changes(editor)
     local old_components = state.components
     local new_components = vim.tbl_filter(function(cmp) return cmp ~= nil end,
         vim.tbl_map(function(line)
-            local buf = vim.fn.bufnr(line)
-            if buf == -1 then return nil end
+            local buf_str = string.match(line, "^ *%d+")
+            if buf_str == nil then return nil end
+            local buf = 0 + buf_str
             for i, cmp in pairs(old_components) do
                 if cmp.id == buf then
                     table.remove(old_components, i)
@@ -34,7 +35,7 @@ local function apply_changes(editor)
     for _, cmp in pairs(old_components) do
         local buf = cmp.id
         local name = vim.api.nvim_buf_get_name(buf)
-        if vim.api.nvim_buf_is_valid(buf) and name ~= "" then
+        if vim.api.nvim_buf_is_valid(buf) then
             local modified = vim.api.nvim_get_option_value("modified", { buf = buf })
             if modified then
                 vim.notify("Cannot close buffer " .. buf .. " (" .. name .. ") due to unsaved changes", vim.log.levels.WARN)
