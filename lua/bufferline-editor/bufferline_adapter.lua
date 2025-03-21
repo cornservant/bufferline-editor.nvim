@@ -44,8 +44,11 @@ local function apply_changes(editor)
         local name = vim.api.nvim_buf_get_name(buf)
         if vim.api.nvim_buf_is_valid(buf) then
             local modified = vim.api.nvim_get_option_value("modified", { buf = buf })
+            local terminal = "terminal" == vim.api.nvim_get_option_value("buftype", { buf = buf })
             if modified then
                 vim.notify("Cannot close buffer " .. buf .. " (" .. name .. ") due to unsaved changes", vim.log.levels.WARN)
+            elseif terminal then
+                vim.api.nvim_buf_delete(buf, { force = true })
             else
                 -- BUG: cannot doesn't delete buffer from floating window
                 -- https://github.com/neovim/neovim/issues/20315
