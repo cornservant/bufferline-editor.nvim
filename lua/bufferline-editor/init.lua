@@ -2,6 +2,7 @@ local M = {}
 
 ---@type bufferline-editor.buffers
 local buffers = require("bufferline-editor.bufferline_adapter")
+local util = require("bufferline-editor.util")
 
 ---@type bufferline-editor.config
 M.config = {
@@ -79,8 +80,8 @@ function M.select_item()
     M.validate()
     if M.editor.buffer == nil then return end
 
-    local filename = vim.api.nvim_get_current_line()
-    local selected_buf = vim.fn.bufnr(filename)
+    local line = vim.api.nvim_get_current_line()
+    local selected_buf = util.get_buf_by_line(line)
     M.editor_close()
     if selected_buf ~= -1 and vim.api.nvim_buf_is_valid(selected_buf) then
         vim.api.nvim_set_current_buf(selected_buf)

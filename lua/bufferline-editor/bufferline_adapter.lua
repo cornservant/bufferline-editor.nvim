@@ -1,4 +1,5 @@
 local state = require("bufferline.state")
+local util = require("bufferline-editor.util")
 
 ---@output integer[]
 local function items()
@@ -20,15 +21,7 @@ local function apply_changes(editor)
     local old_components = state.components
     local new_components = vim.tbl_filter(function(cmp) return cmp ~= nil end,
         vim.tbl_map(function(line)
-            local buf = nil
-            local buf_str = string.match(line, "^ *%d+")
-            if buf_str ~= nil then
-                buf = 0 + buf_str
-            else
-                -- fallback strategy
-                buf = vim.fn.bufnr(line)
-                if buf == -1 then return nil end
-            end
+            local buf = util.get_buf_by_line(line)
 
             for i, cmp in pairs(old_components) do
                 if cmp.id == buf then
